@@ -18,6 +18,9 @@ services:
       # Required for KRaft to initialize
       CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_LOG_DIRS: '/var/lib/kafka/data' # Explicitly set the data path
+    volumes:
+      - kafka_data:/var/lib/kafka/data # Persist the data here
     healthcheck:
       test: ["CMD", "kafka-topics", "--bootstrap-server", "localhost:9092", "--list"]
       interval: 10s
@@ -54,3 +57,4 @@ services:
 
 volumes:
   postgres_data:
+  kafka_data:
